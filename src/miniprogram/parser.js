@@ -230,6 +230,7 @@ Parser.prototype.getUrl = function (url) {
  */
 Parser.prototype.parseStyle = function (node) {
   const attrs = node.attrs
+  const { alt = '' } = attrs;
   const list = (this.tagStyle[node.name] || '').split(';').concat((attrs.style || '').split(';'))
   const styleObj = {}
   let tmp = ''
@@ -251,6 +252,25 @@ Parser.prototype.parseStyle = function (node) {
   if (attrs.height) {
     styleObj.height = parseFloat(attrs.height) + (attrs.height.includes('%') ? '%' : 'px')
     attrs.height = undefined
+  }
+
+  // 处理图片的宽高
+  const match = /#(\d+)px.*?#(\d+)px/.exec(alt);
+  if (match) {
+    const width = Number(match[1]);
+    const height = Number(match[2]);
+    // md可显示的大小
+    const maxWidth = 280;
+    // 如果图片宽高存在，则定义到style解析器中
+    if(width && height) {
+      styleObj.width = width + 'px';
+      styleObj.width = height + 'px';
+    }
+    // 图片太宽，等比例缩放
+    if (width >= maxWidth) {
+      styleObj.width = maxWidth + 'px';
+      styleObj.height = Math.ceil((maxWidth * height)/width) + 'px';
+    }
   }
 
   for (let i = 0, len = list.length; i < len; i++) {

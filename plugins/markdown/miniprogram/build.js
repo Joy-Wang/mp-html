@@ -3,8 +3,8 @@ const path = require('path')
 module.exports = {
   style:
     `.md-p {
-  margin-block-start: 1em;
-  margin-block-end: 1em;
+  margin-block-start: 0;
+  margin-block-end: 0;
 }
 
 .md-table,
