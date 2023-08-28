@@ -42,6 +42,16 @@ Component({
     },
 
     /**
+     * @description 是否允许外部链接被点击时自动复制
+     * @type {Boolean}
+     * @default true
+     */
+    guildImgLoading: {
+      type: Boolean,
+      value: false
+    },
+
+    /**
      * @description 主域名，用于拼接链接
      * @type {String}
      */

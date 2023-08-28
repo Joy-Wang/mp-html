@@ -549,6 +549,7 @@ Parser.prototype.onOpenTag = function (selfClose) {
     node.children = []
     this.stack.push(node)
   }
+  console.log('====node', node);
   // 加入节点树
   siblings.push(node)
 }

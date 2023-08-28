@@ -17,6 +17,49 @@
   -webkit-touch-callout: none;
 }
 
+/* 图片容器 */
+._img-box {
+  position: relative;
+  display: inline-block;
+}
+
+/* 图片 */
+._guild-img {
+  position: relative;
+  z-index: 1;
+  max-width: 100%;
+  -webkit-touch-callout: none;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+}
+
+/* 兜底loading图片 */
+._img-loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 2;
+  -webkit-touch-callout: none;
+  width: 30px !important;
+  height: 30px !important;
+  margin-top: -30px;
+  margin-left: -15px;
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAB4CAMAAAAOusbgAAAANlBMVEUAAACZmZmZmZmXl5eampqZmZmZmZmYmJiYmJifn5+YmJiZmZmampqampqZmZmampqbm5uZmZlkM2W1AAAAEXRSTlMAcO8gv9+AYDAQQK+fz6CQUMGCGTEAAAIeSURBVGje7Zlhb4MgEIYLd4CKTvn/f3Z1Znm7oRkqXJbmno+N7ZMDynvgQ1EURVEURVGUN6T37NJtLBs6pSVO1RhPqI1NFbGm1OtTZXxhvWkFs3ODLmwLpahmsqXDUz5ttqSIj/XB7lGNbjVzQcEYmvtg6vqix9yjKoz19cdToa7YFI31OiNdXTEVDWJ6Us+J31RxDTHyDHkkJibO8khEbGyWRyJin+WRjBh5hjwSECPPsjxqJs7zDHnUVow8y/OoqRh5ludRUzHyLM+jpmLkWZ5HTcX4Rv7Z+4rXHYN+NXjrH6y5mPPuMIgsLg/L6yCY5uJ+fwOhVmLAe1vmeHrL3LDOMY+zWYZeKiQyLEcD/XEsuvCsmgxfjcUDpnGh5o3AoXwemrc+PdEwBD/Hyf5wu7Hbn+cPPMOVmr1+MHF6dQfaVRu2KTn2fZX2FvaZMZQjiTb0FKJF7ywiBiFCLSRG3W4zWy8kBt9qR8JiqL2wGOqJZMXYMlwnJQbLVnSQEgOKmGhBMWLJC4sRxUFMDMKXuZMVw+xIVgwzC4uxwoywGP0tyYrR37KwGNM8yIkBo2RZ8YCSxcQoOcqKUbLtr/4mzvfnsbtbNu4Hys/3F3aReLzmuex8f3WsjwfRnDnf377uyu8Hys/35cSdScb9QJOXmihsvvRSMz/fn2LJVxfuB/73i2vRV/V5s14NplIrzvd32e4HFEVRFEVRFOXd+QTZemq03GOBoAAAAABJRU5ErkJggg==);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+._img-txt-loading {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  height: 16px;
+  font-size: 12px;
+  line-height: 16px;
+  color: #8c8c8c;
+  text-align: center;
+}
+
 /* 内部样式 */
 
 ._b,

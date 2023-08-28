@@ -125,7 +125,7 @@ Component({
       let val
       if (!node.w) {
         val = e.detail.width
-      } else if ((this.properties.opts[1] && !this.data.ctrl[i]) || this.data.ctrl[i] === -1) {
+      } else if (((this.properties.opts[1] || this.properties.opts[5]) && !this.data.ctrl[i]) || this.data.ctrl[i] === -1) {
         // 加载完毕，取消加载中占位图
         val = 1
       }
@@ -219,6 +219,7 @@ Component({
           })
         }
       } else if (node.name === 'img') {
+        console.log('====this.properties.opts', this.properties.opts);
         // 显示错误占位图
         if (this.properties.opts[2]) {
           this.setData({
