@@ -77,6 +77,14 @@ const {
 const blankChar = makeMap(' ,\r,\n,\t,\f')
 let idIndex = 0
 
+// 频道md最大宽度
+const mdMaxWidth = 280;
+// 频道md图片loading的尺寸限制
+const imgLoadingMinSize = {
+  width: 100,
+  height: 100,
+}
+
 /**
  * @description 创建 map
  * @param {String} str 逗号分隔
@@ -259,17 +267,15 @@ Parser.prototype.parseStyle = function (node) {
   if (match) {
     const width = Number(match[1]);
     const height = Number(match[2]);
-    // md可显示的大小
-    const maxWidth = 280;
     // 如果图片宽高存在，则定义到style解析器中
     if(width && height) {
       styleObj.width = width + 'px';
-      styleObj.width = height + 'px';
+      styleObj.height = height + 'px';
     }
     // 图片太宽，等比例缩放
-    if (width >= maxWidth) {
-      styleObj.width = maxWidth + 'px';
-      styleObj.height = Math.ceil((maxWidth * height)/width) + 'px';
+    if (width >= mdMaxWidth) {
+      styleObj.width = mdMaxWidth + 'px';
+      styleObj.height = Math.ceil((mdMaxWidth * height)/width) + 'px';
     }
   }
 
@@ -515,16 +521,15 @@ Parser.prototype.onOpenTag = function (selfClose) {
         attrs.style += ';-webkit-touch-callout:none'
       }
       // 设置的宽度超出屏幕，为避免变形，高度转为自动
-      if (parseInt(styleObj.width) > windowWidth) {
-        styleObj.height = undefined
-      }
+      const styleWidth = parseInt(styleObj.width);
+      const styleHeight = parseInt(styleObj.height);
+      if (styleWidth > windowWidth) styleObj.height = undefined
       // 记录是否设置了宽高
-      if (!isNaN(parseInt(styleObj.width))) {
-        node.w = 'T'
-      }
-      if (!isNaN(parseInt(styleObj.height)) && (!styleObj.height.includes('%') || (parent && (parent.attrs.style || '').includes('height')))) {
-        node.h = 'T'
-      }
+      if (!isNaN(styleWidth)) node.w = 'T'
+      if (!isNaN(styleHeight) && (!styleObj.height.includes('%') || (parent && (parent.attrs.style || '').includes('height')))) node.h = 'T'
+      // 设置是否需要使用图片loading，限制尺寸大于100*100的才使用loading
+      const { width: loadingMinWidth, height: loadingMinHeight } = imgLoadingMinSize;
+      if (styleWidth >= loadingMinWidth && styleHeight >= loadingMinHeight) node.imgCanLoading = 'true';
     } else if (node.name === 'svg') {
       siblings.push(node)
       this.stack.push(node)
@@ -549,7 +554,6 @@ Parser.prototype.onOpenTag = function (selfClose) {
     node.children = []
     this.stack.push(node)
   }
-  console.log('====node', node);
   // 加入节点树
   siblings.push(node)
 }

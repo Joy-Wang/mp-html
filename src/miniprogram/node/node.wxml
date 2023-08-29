@@ -36,7 +36,7 @@
       <!-- 图片容器，用于开启了频道图片loading -->
       <view wx:if="{{opts[5]}}" class="_img-box">
         <!-- loading占位图 -->
-        <block wx:if="{{!ctrl[i]||ctrl[i]<0}}">
+        <block wx:if="{{(!ctrl[i]||ctrl[i]<0)&&n.imgCanLoading}}">
           <view class="_img-loading"></view>
           <text class="_img-txt-loading">加载中</text>
         </block>

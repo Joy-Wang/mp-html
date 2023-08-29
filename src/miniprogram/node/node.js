@@ -219,7 +219,6 @@ Component({
           })
         }
       } else if (node.name === 'img') {
-        console.log('====this.properties.opts', this.properties.opts);
         // 显示错误占位图
         if (this.properties.opts[2]) {
           this.setData({
