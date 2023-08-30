@@ -264,7 +264,7 @@ Parser.prototype.parseStyle = function (node) {
 
   // 处理图片的宽高
   const match = /#(\d+)px.*?#(\d+)px/.exec(alt);
-  if (match) {
+  if (match && node.name === 'img') {
     const width = Number(match[1]);
     const height = Number(match[2]);
     // 如果图片宽高存在，则定义到style解析器中
@@ -729,6 +729,8 @@ Parser.prototype.popNode = function () {
     // 未知标签转为 span，避免无法显示
     node.name = 'span'
   } else if (node.name === 'a' || node.name === 'ad') {
+    // 因为无法单独控制a标签下text颜色，因此通过给a标签注入style来处理
+    node.children.forEach((item) => { if (item.type === 'text') item.aStyle = 'color:#2D77E5' });
     this.expose()
   } else if (node.name === 'video' || node.name === 'audio') {
     if ((styleObj.height || '').includes('auto')) {

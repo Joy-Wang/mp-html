@@ -1,8 +1,12 @@
 /* a 标签默认效果 */
 ._a {
   padding: 1.5px 0 1.5px 0;
-  color: #366092;
+  color: #2D77E5;
   word-break: break-all;
+}
+
+text {
+  color: #000;
 }
 
 /* a 标签点击态效果 */

@@ -42,7 +42,7 @@ Component({
     },
 
     /**
-     * @description 是否允许外部链接被点击时自动复制
+     * @description 频道是否开启图片loading态
      * @type {Boolean}
      * @default true
      */
