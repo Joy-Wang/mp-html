@@ -78,11 +78,23 @@ const blankChar = makeMap(' ,\r,\n,\t,\f')
 let idIndex = 0
 
 // 频道md最大宽度
-const mdMaxWidth = 280;
+const mdMaxWidth = getMaxWidth();
 // 频道md图片loading的尺寸限制
 const imgLoadingMinSize = {
   width: 100,
   height: 100,
+}
+
+// 获取屏幕宽度，计算出最大宽度
+function getMaxWidth () {
+  const windowWidth = wx.getSystemInfoSync().windowWidth;
+  // 获取rpx对应比例
+  const pixelRatio = 750 / windowWidth;
+  // aio中空白区域的rpx值为 32+28+20+72
+  const moreRpx = 152;
+  // 20为md消息的padding值
+  const maxWidth = windowWidth - Math.ceil(moreRpx / pixelRatio) - 20;
+  return maxWidth;
 }
 
 /**
