@@ -275,10 +275,14 @@ Parser.prototype.parseStyle = function (node) {
   }
 
   // 处理图片的宽高
-  const match = /#(\d+)px.*?#(\d+)px/.exec(alt);
-  if (match && node.name === 'img') {
-    const width = Number(match[1]);
-    const height = Number(match[2]);
+  const regex = /#(\d+)/g;
+  const matches = [];
+  for (const match of alt.matchAll(regex)) {
+    matches.push(parseInt(match[1]));
+  }
+  if (matches && node.name === 'img') {
+    const width = Number(matches[0]);
+    const height = Number(matches[1]);
     // 如果图片宽高存在，则定义到style解析器中
     if(width && height) {
       styleObj.width = width + 'px';
