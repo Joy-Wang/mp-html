@@ -1050,8 +1050,10 @@ Parser.prototype.onText = function (text) {
       this.expose()
     }
     // #endif
-    const siblings = this.stack.length ? this.stack[this.stack.length - 1].children : this.nodes
-    siblings.push(node)
+    const siblings = this.stack.length ? this.stack[this.stack.length - 1].children : this.nodes;
+    // 正则匹配换行符，将只有换行的字符串过滤
+    const reg = /^[\n|\r|&#8203]$/;
+    if (!reg.test(node.text)) siblings.push(node);
   }
 }
 

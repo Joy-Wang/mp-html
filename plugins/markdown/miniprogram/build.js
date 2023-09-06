@@ -7,8 +7,7 @@ module.exports = {
   margin-block-end: 0;
 }
 
-.md-table,
-.md-blockquote {
+.md-table {
   margin-bottom: 16px;
 }
 
@@ -40,9 +39,12 @@ module.exports = {
 }
 
 .md-blockquote {
-  padding: 0 1em;
-  color: #6a737d;
-  border-left: 0.25em solid #dfe2e5;
+  padding: 0 4px;
+  color: #8C8C8C;
+  border-left: 2px solid #8C8C8C;
+  font-size: 13px;
+  font-weight: 400;
+  margin-bottom: 3px;
 }
 
 .md-code {
